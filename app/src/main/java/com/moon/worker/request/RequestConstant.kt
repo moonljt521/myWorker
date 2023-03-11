@@ -8,8 +8,8 @@ package com.moon.worker.request
 class RequestConstant {
 
     companion object {
-        const val Authorization = "Basic bGlucS1hcHAtVEJjQkVldEU6OVlDUkUyamFlcTMyMnJUZA=="
-        const val BASE_URL = "https://my-deployment-f63632.es.us-central1.gcp.cloud.es.io:9243/";
+        const val Authorization = "Basic xx"
+        const val BASE_URL = "https://app.linqpros.com/";
 
 
     }
