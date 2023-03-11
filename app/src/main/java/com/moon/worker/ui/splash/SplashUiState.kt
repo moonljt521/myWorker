@@ -7,6 +7,5 @@ package com.moon.worker.ui.splash
  */
 data class SplashUiState(
 
-    var turnToGuidePage : Boolean = false
-
+    var turnToGuidePage : Boolean = false,
 )

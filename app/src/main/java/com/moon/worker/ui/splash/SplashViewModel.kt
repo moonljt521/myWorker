@@ -1,9 +1,12 @@
 package com.moon.worker.ui.splash
 
+import android.app.Activity
 import android.content.Context
-import android.widget.Toast
+import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moon.worker.ui.guide.GuideActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +19,7 @@ import kotlinx.coroutines.launch
  */
 class SplashViewModel : ViewModel() {
 
-    private  val _uiState = MutableStateFlow(SplashUiState())
+    private val _uiState = MutableStateFlow(SplashUiState())
     val uiState: StateFlow<SplashUiState> = _uiState
 
     init {
@@ -29,5 +32,4 @@ class SplashViewModel : ViewModel() {
             _uiState.value = SplashUiState(turnToGuidePage = true)
         }
     }
-
 }

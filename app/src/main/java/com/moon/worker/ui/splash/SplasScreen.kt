@@ -3,8 +3,6 @@ package com.moon.worker.ui.splash
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,6 +20,9 @@ import com.moon.worker.ui.guide.GuideActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import androidx.compose.runtime.LaunchedEffect
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.withContext
 
 /**
@@ -53,9 +54,17 @@ fun Splash(
         Text(text = "Linq Pros", fontSize = 25.sp, color = Color.White)
     }
 
-    if (splashUiState.turnToGuidePage){
-        LocalContext.current.startActivity(Intent(LocalContext.current,
-            GuideActivity::class.java))
-        (LocalContext.current as Activity).finish()
+    val context = LocalContext.current
+
+    LaunchedEffect(splashUiState.turnToGuidePage){
+        if (splashUiState.turnToGuidePage){
+            withContext(Dispatchers.Main){
+                context.startActivity(Intent(context,
+                    GuideActivity::class.java))
+                (context as Activity).finish()
+            }
+        }
     }
+
 }
+
