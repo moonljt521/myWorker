@@ -1,12 +1,7 @@
 package com.moon.worker.ui.splash
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.moon.worker.ui.guide.GuideActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
