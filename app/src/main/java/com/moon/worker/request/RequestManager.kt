@@ -1,6 +1,6 @@
 package com.moon.worker.request
 
-import com.moon.worker.request.model.LinqResult
+import com.moon.worker.request.model.LinqResponse
 import com.moon.worker.request.model.LoginReq
 import com.moon.worker.request.model.LoginResponse
 import okhttp3.Interceptor
@@ -9,7 +9,6 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 /**
  * @Des：
@@ -22,18 +21,11 @@ object RequestManager {
     private var accountApi: AccountApi? = null
 
     val retrofit = Retrofit.Builder()
-        .baseUrl(RequestConstant.BASE_URL)
+        .baseUrl(RequestConstant.DEBUG_BASE_URL)
+//        .baseUrl(RequestConstant.BASE_URL)
         .client(getRecipeOkHttpClient())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-
-    // 新服务器接口
-    private fun getRecipeServiceAPI(): RequestServiceApi? {
-        if (serviceApi == null) {
-            serviceApi = retrofit.create(RequestServiceApi::class.java)
-        }
-        return serviceApi
-    }
 
     private fun getAccountApi() : AccountApi{
         return retrofit.create(AccountApi::class.java)
@@ -42,7 +34,7 @@ object RequestManager {
     private fun getRecipeOkHttpClient(): OkHttpClient {
         val level = HttpLoggingInterceptor.Level.BODY
         val loggingInterceptor = HttpLoggingInterceptor { message ->
-//            Timber.i(message)
+            println(message)
         }
         loggingInterceptor.level = level
 
@@ -57,16 +49,15 @@ object RequestManager {
     suspend fun login(
         phoneNumber: String,
         pwd: String,
-        smsCode: String
-    ): LinqResult<LoginResponse> {
+        smsCode: String? = null
+    ): LinqResponse<LoginResponse> {
         val body = LoginReq(
             phoneNumber,pwd,smsCode
         )
-        return safeApiCall {
+        return safeApiCall{
             getAccountApi().login(body)
         }
     }
-
 }
 
 class AuthInterceptor : Interceptor {
@@ -75,22 +66,24 @@ class AuthInterceptor : Interceptor {
         val request = chain.request().newBuilder()
             .addHeader("Content-Type", "application/json")
             .addHeader("Accept", "application/json")
-            .addHeader("Authorization", RequestConstant.Authorization)
+            .addHeader("auth-token", AccountHelper.token)
+            .addHeader("Authorization", "Bearer ${AccountHelper.token}")
             .build()
         return chain.proceed(request)
     }
 }
 
-suspend fun <T : Any> safeApiCall(call: suspend () -> T): LinqResult<T> {
+suspend fun<T : Any> safeApiCall(call: suspend () -> LinqResponse<T>): LinqResponse<T> {
     return try {
-        LinqResult.Success(call())
+        call()
     } catch (e: Exception) {
         e.printStackTrace()
-//        if (!NetworkUtils.isConnected() || (e is java.net.SocketTimeoutException)) {
-        if ( (e is java.net.SocketTimeoutException)) {
-            return LinqResult.Error("当前网络不畅，请检查您的网络设置!", 3000)
+//        if (!NetWorkUtils.isConnected(get) || (e is java.net.SocketTimeoutException)) {
+        if ((e is java.net.SocketTimeoutException)) {
+            return LinqResponse(msg = "当前网络不畅，请检查您的网络设置!", code = 1 , data = null)
         } else {
-            return LinqResult.Error("请求异常,请稍后重试", 3001)
+
+            return LinqResponse(msg = "请求异常,请稍后重试", code = 1, data = null)
         }
     }
 }
