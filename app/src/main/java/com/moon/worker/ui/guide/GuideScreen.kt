@@ -1,5 +1,7 @@
 package com.moon.worker.ui.guide
 
+import android.app.Activity
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -19,6 +22,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
+import com.moon.worker.ui.account.login_pwd.PwdLoginActivity
+import com.moon.worker.ui.common.CommonBlueButton
 import com.moon.worker.ui.theme.majorBlue
 import com.moon.worker.ui.theme.majorTextColor
 import com.moon.worker.ui.theme.minorTextColor
@@ -63,26 +68,16 @@ fun GuideScreen(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        Button(
-            colors = ButtonDefaults.buttonColors(backgroundColor = majorBlue,),
-            modifier = Modifier
-                .padding(horizontal = 20.dp, vertical = 27.dp)
-                .fillMaxWidth()
-                .padding(vertical = 16.dp)
-                .clip(shape = RoundedCornerShape(8.dp))
-            ,
-            onClick = {
+        val context = LocalContext.current as Activity
 
+        CommonBlueButton(
+            title = "Sign In",
+            click = {
+                context.let {
+                    it.startActivity(Intent(it, PwdLoginActivity::class.java))
+                }
             }
-        ) {
-            androidx.compose.material.Text(
-                color = Color.White,
-                text = "Sign In",
-                fontSize = 16.sp
-            )
-        }
-
-
+        )
     }
 }
 
