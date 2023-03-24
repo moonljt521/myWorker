@@ -20,6 +20,7 @@ class PwdLoginViewModel : ViewModel() {
 
     val uiState : StateFlow<AccountUIData> = _uiState
 
+    var showPassword = false
 
     fun emitPhoneNumber(phoneNumber : String) {
         viewModelScope.launch {
@@ -37,5 +38,16 @@ class PwdLoginViewModel : ViewModel() {
        return uiState.value.phoneNumber.isNotEmpty() && uiState.value.passWord.isNotEmpty()
     }
 
+    fun clearMobile() {
+        emitPhoneNumber("")
+    }
+
+    fun clearPassword() {
+        emitPwd("")
+    }
+
+    fun switchPwd() {
+        showPassword = !showPassword
+    }
 
 }

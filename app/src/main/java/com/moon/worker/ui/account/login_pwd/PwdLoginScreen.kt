@@ -16,6 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.moon.worker.R
+import com.moon.worker.ui.account.widget.MobileTextFieldComponent
+import com.moon.worker.ui.account.widget.PasswordTextFieldComponent
 import com.moon.worker.ui.common.CommonBlueButton
 
 /**
@@ -37,7 +39,7 @@ fun PwdLoginScreen(
         Image(
             modifier = Modifier
                 .padding(start = 10.dp, top = 60.dp)
-                .width(55.dp),
+                .width(75.dp),
             painter = painterResource(id = R.drawable.app_icon), contentDescription = "")
 
         Text(
@@ -45,17 +47,26 @@ fun PwdLoginScreen(
             style = TextStyle(fontSize = 16.sp , color = Color.Black),
             text = "Linq Pros")
 
-        TextField(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp , vertical = 34.dp)
-            ,value = uiData.value.phoneNumber, onValueChange = {
-                viewModel.emitPhoneNumber(it)
-        })
 
-        TextField(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp , vertical = 34.dp)
-            ,value = uiData.value.passWord, onValueChange = {
+        MobileTextFieldComponent(
+            mobile = uiData.value.phoneNumber,
+            mobileChanged = {
+                viewModel.emitPhoneNumber(it)
+            },
+            mobileClear = {
+                viewModel.clearMobile()
+            }
+        )
+
+        PasswordTextFieldComponent(
+            password = uiData.value.passWord,
+            passwordChanged = {
                 viewModel.emitPwd(it)
-            })
+            },
+            passwordClear = {
+                viewModel.clearPassword()
+            },
+        )
 
         CommonBlueButton(
             title = "Sign In",
