@@ -30,5 +30,25 @@ class RequestApiTest {
 //        Log.i("moon", result.toString())
     }
 
+    @Test
+    fun testDelegrate() {
+        val impl = PrintImpl()
+        var i = I(impl)
+        i.print()
+    }
+
+}
+
+interface BasePrint {
+    fun print()
+}
+
+class PrintImpl : BasePrint {
+    override fun print() {
+        println("impl....")
+    }
+}
+
+class I(val impl: BasePrint) : BasePrint by impl {
 
 }

@@ -37,7 +37,7 @@ fun CommonBlueButton(
             .clip(shape = RoundedCornerShape(8.dp))
         ,
         onClick = {
-            click()
+            if (enabledButton) click()
         }
     ) {
         Text(

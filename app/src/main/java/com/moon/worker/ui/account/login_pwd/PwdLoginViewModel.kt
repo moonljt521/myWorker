@@ -3,7 +3,10 @@ package com.moon.worker.ui.account.login_pwd
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moon.worker.request.AccountHelper
+import com.moon.worker.request.RequestManager
 import com.moon.worker.ui.account.AccountUIData
+import com.moon.worker.utils.ValidateUtil
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -20,8 +23,6 @@ class PwdLoginViewModel : ViewModel() {
 
     val uiState : StateFlow<AccountUIData> = _uiState
 
-    var showPassword = false
-
     fun emitPhoneNumber(phoneNumber : String) {
         viewModelScope.launch {
             _uiState.emit(uiState.value.copy(phoneNumber = phoneNumber))
@@ -35,7 +36,8 @@ class PwdLoginViewModel : ViewModel() {
     }
 
     fun enabledButton() : Boolean{
-       return uiState.value.phoneNumber.isNotEmpty() && uiState.value.passWord.isNotEmpty()
+       return ValidateUtil.isMobile(uiState.value.phoneNumber)
+               && ValidateUtil.isPwd(uiState.value.passWord)
     }
 
     fun clearMobile() {
@@ -46,8 +48,19 @@ class PwdLoginViewModel : ViewModel() {
         emitPwd("")
     }
 
-    fun switchPwd() {
-        showPassword = !showPassword
+    fun pwdLogin(loginResult:(Boolean) -> Unit) {
+        viewModelScope.launch {
+            val phone = uiState.value.phoneNumber
+            val pwd = uiState.value.passWord
+            val result = RequestManager.login("+1$phone",pwd)
+            println("testLogin : ${result.toString()}")
+            val token = result.data?.accessToken
+            if (token?.isNotEmpty() == true){
+                AccountHelper.token = token
+                loginResult(true)
+            }
+        }
+
     }
 
 }

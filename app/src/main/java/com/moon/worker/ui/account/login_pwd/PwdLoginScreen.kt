@@ -1,5 +1,6 @@
 package com.moon.worker.ui.account.login_pwd
 
+import android.app.Activity
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -19,6 +20,7 @@ import com.moon.worker.R
 import com.moon.worker.ui.account.widget.MobileTextFieldComponent
 import com.moon.worker.ui.account.widget.PasswordTextFieldComponent
 import com.moon.worker.ui.common.CommonBlueButton
+import com.moon.worker.ui.main.MainActivity
 
 /**
  * @Des：
@@ -72,9 +74,13 @@ fun PwdLoginScreen(
             title = "Sign In",
             enabledButton = viewModel.enabledButton(),
             click = {
-                context.let {
-                    it.startActivity(Intent(it, PwdLoginActivity::class.java))
-                }
+                viewModel.pwdLogin(loginResult = {
+                    context.let {
+                        it.startActivity(Intent(it, MainActivity::class.java))
+                        (context as Activity).finish()
+                    }
+                })
+
             }
         )
 

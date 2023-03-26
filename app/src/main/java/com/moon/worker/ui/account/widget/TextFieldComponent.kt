@@ -123,7 +123,9 @@ fun PasswordTextFieldComponent(
         },
 
         trailingIcon = {
-            if (password.isNotEmpty()) Row() {
+            if (password.isNotEmpty()) Row(
+                modifier = Modifier.padding(end = 10.dp)
+            ) {
 
                 Icon(
                     imageVector = if (showPassword) Icons.Default.Visibility else Icons.Default.VisibilityOff, contentDescription = null,
@@ -137,7 +139,6 @@ fun PasswordTextFieldComponent(
                         passwordClear()
                     })
 
-                5.dp
             }
             else 0.dp
         },

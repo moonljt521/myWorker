@@ -1,49 +1,37 @@
-package com.moon.worker
+package com.moon.worker.ui.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.view.WindowCompat
+import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.moon.worker.ui.theme.MyworkerTheme
 
-class MainActivity1 : ComponentActivity() {
+/**
+ * @Des：
+ * @author: moon
+ * @date: 3/26/23
+ */
+class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MyworkerTheme {
                 val systemUiController = rememberSystemUiController()
                 systemUiController.setSystemBarsColor(
-                    color = androidx.compose.material3.MaterialTheme.colorScheme.background
+                    color = Color.White
                 )
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = Color.White
                 ) {
-                    Greeting("Android")
+                    MainScreen()
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MyworkerTheme {
-        Greeting("Android")
     }
 }
