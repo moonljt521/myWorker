@@ -1,8 +1,6 @@
 package com.moon.worker.request
 
-import com.moon.worker.request.model.LinqResponse
-import com.moon.worker.request.model.LoginReq
-import com.moon.worker.request.model.LoginResponse
+import com.moon.worker.request.model.*
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -45,7 +43,7 @@ object RequestManager {
         return httpClientBuilder.build()
     }
 
-    // 简单列表
+    // 手机号密码登录
     suspend fun login(
         phoneNumber: String,
         pwd: String,
@@ -56,6 +54,19 @@ object RequestManager {
         )
         return safeApiCall{
             getAccountApi().login(body)
+        }
+    }
+
+    // 发送验证码
+    suspend fun sendCode(phoneNumber: String,
+      type: SendCodeType
+    ) : LinqResponse<String> {
+        return safeApiCall {
+            val map = mapOf<String,String>(
+                "phone_number" to phoneNumber,
+                "verify_type" to type.value.toString()
+            )
+            getAccountApi().sendCode(map)
         }
     }
 }

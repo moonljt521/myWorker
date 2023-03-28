@@ -8,10 +8,11 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.moon.worker.ui.account.login_verify_code.VerifyCodeLoginScreen
 import com.moon.worker.ui.theme.MyworkerTheme
 
 /**
- * @Des：登录-手机号输入
+ * @Des：登录-验证码
  * @author: moon
  * @date: 3/10/23
  */
@@ -30,7 +31,7 @@ class VerifyCodeLoginActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color.White
                 ) {
-                    //todo
+                    VerifyCodeLoginScreen()
                 }
             }
         }

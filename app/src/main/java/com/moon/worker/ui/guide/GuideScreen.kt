@@ -23,6 +23,7 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import com.moon.worker.ui.account.login_pwd.PwdLoginActivity
+import com.moon.worker.ui.account.login_pwd.VerifyCodeLoginActivity
 import com.moon.worker.ui.common.CommonBlueButton
 import com.moon.worker.ui.theme.majorBlue
 import com.moon.worker.ui.theme.majorTextColor
@@ -74,7 +75,7 @@ fun GuideScreen(
             title = "Sign In",
             click = {
                 context.let {
-                    it.startActivity(Intent(it, PwdLoginActivity::class.java))
+                    it.startActivity(Intent(it, VerifyCodeLoginActivity::class.java))
                 }
             }
         )

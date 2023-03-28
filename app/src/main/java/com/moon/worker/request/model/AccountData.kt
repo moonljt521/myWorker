@@ -27,3 +27,12 @@ data class LoginResponse (
     @SerializedName("twilio_token")
     val twilioToken : String,
 ) : BaseResponse()
+
+
+
+enum class SendCodeType(val value : Int){
+    login(2),
+    reg(0),
+    resetPwd(1),
+
+}

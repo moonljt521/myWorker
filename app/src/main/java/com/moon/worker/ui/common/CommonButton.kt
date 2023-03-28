@@ -31,10 +31,11 @@ fun CommonBlueButton(
     Button(
         colors = ButtonDefaults.buttonColors(backgroundColor = (if (enabledButton) majorBlue else Color.Gray)),
         modifier = Modifier
-            .padding(horizontal = 20.dp, vertical = 27.dp)
+            .padding(horizontal = 20.dp)
             .fillMaxWidth()
-            .padding(vertical = 18.dp)
+            .padding(vertical = 25.dp)
             .clip(shape = RoundedCornerShape(8.dp))
+            .padding(vertical = 10.dp)
         ,
         onClick = {
             if (enabledButton) click()

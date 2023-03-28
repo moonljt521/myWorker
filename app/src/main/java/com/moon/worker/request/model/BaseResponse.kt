@@ -8,3 +8,5 @@ import java.io.Serializable
  */
 open class BaseResponse : Serializable {
 }
+
+
