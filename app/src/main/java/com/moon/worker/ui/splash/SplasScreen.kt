@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.sp
 import com.moon.worker.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
@@ -21,6 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.draw.clip
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.withContext
@@ -48,7 +50,8 @@ fun Splash(
             modifier = Modifier
                 .padding(bottom = 15.dp)
                 .width(60.dp)
-                .height(60.dp),
+                .height(60.dp)
+                .clip(shape = RoundedCornerShape(8.dp)),
             painter = painterResource(id = R.drawable.app_icon), contentDescription = "")
 
         Text(text = "Linq Pros", fontSize = 25.sp, color = Color.White)
