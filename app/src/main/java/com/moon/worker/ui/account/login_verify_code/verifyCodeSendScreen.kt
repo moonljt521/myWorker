@@ -1,7 +1,7 @@
 package com.moon.worker.ui.account.login_verify_code
 
-import android.app.Activity
 import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -19,9 +19,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.moon.worker.R
 import com.moon.worker.ui.account.login_pwd.PwdLoginActivity
+import com.moon.worker.ui.account.login_verify_code_fill.VerifyCodeLoginFillActivity
 import com.moon.worker.ui.account.widget.MobileTextFieldComponent
 import com.moon.worker.ui.common.CommonBlueButton
-import com.moon.worker.ui.main.MainActivity
 import com.moon.worker.ui.theme.hintTextColor
 import com.moon.worker.ui.theme.minorTextColor
 
@@ -77,8 +77,9 @@ fun VerifyCodeLoginScreen(
             click = {
                 viewModel.sendCode(sendCodeResult = {
                     context.let {
-//                        it.startActivity(Intent(it, MainActivity::class.java))
-//                        (context as Activity).finish()
+                        Toast.makeText(context , "The verify code has benn sent" , Toast.LENGTH_LONG).show()
+                        it.startActivity(Intent(it, VerifyCodeLoginFillActivity::class.java)
+                            .putExtra("phone", viewModel.uiState.value.phoneNumber))
                     }
                 })
             }

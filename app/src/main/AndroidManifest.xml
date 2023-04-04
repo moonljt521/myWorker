@@ -44,11 +44,15 @@
         <activity
             android:name=".ui.account.login_pwd.PwdLoginActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.Myworker"/>
 
         <activity
             android:name=".ui.account.login_pwd.VerifyCodeLoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Myworker"/>
+
+        <activity
+            android:name=".ui.account.login_verify_code_fill.VerifyCodeLoginFillActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Myworker"/>

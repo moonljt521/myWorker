@@ -46,7 +46,7 @@ object RequestManager {
     // 手机号密码登录
     suspend fun login(
         phoneNumber: String,
-        pwd: String,
+        pwd: String? = null,
         smsCode: String? = null
     ): LinqResponse<LoginResponse> {
         val body = LoginReq(

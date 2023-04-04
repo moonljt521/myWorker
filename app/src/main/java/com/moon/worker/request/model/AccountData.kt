@@ -8,7 +8,7 @@ data class LoginReq(
     val phoneNumber: String,
 
     @SerializedName("password")
-    val password : String,
+    val password : String? = null,
 
     @SerializedName("sms_code")
     val smsCode : String? = null
