@@ -3,9 +3,11 @@ package com.moon.worker.ui.account.login_pwd
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moon.worker.LinqApplication
 import com.moon.worker.request.AccountHelper
 import com.moon.worker.request.RequestManager
 import com.moon.worker.ui.account.AccountUIData
+import com.moon.worker.utils.SharedPreferencesUtil
 import com.moon.worker.utils.ValidateUtil
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -55,8 +57,10 @@ class PwdLoginViewModel : ViewModel() {
             val result = RequestManager.login("+1$phone",pwd)
             println("testLogin : ${result.toString()}")
             val token = result.data?.accessToken
+
             if (token?.isNotEmpty() == true){
                 AccountHelper.token = token
+                SharedPreferencesUtil.getSPInstance(LinqApplication.application).putSP("token",token)
                 loginResult(true)
             }
         }

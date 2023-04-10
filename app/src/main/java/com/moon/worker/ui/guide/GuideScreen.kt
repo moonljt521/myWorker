@@ -14,12 +14,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.size.Size
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
+import com.moon.worker.request.AccountHelper
 import com.moon.worker.ui.account.login_pwd.VerifyCodeLoginActivity
 import com.moon.worker.ui.common.CommonBlueButton
+import com.moon.worker.ui.main.MainActivity
 import com.moon.worker.ui.theme.majorBlue
 import com.moon.worker.ui.theme.majorTextColor
 import com.moon.worker.ui.theme.minorTextColor
@@ -42,7 +45,7 @@ fun GuideScreen(
         initialPage = 0,
     )
 
-    Column(modifier = Modifier) {
+    Column(modifier = Modifier.padding(bottom = 20.dp)) {
 
         Spacer(modifier = Modifier.height(60.dp))
 
@@ -70,10 +73,16 @@ fun GuideScreen(
             title = "Sign In",
             click = {
                 context.let {
-                    it.startActivity(Intent(it, VerifyCodeLoginActivity::class.java))
+                    if(AccountHelper.token.isNotEmpty()){
+                        it.startActivity(Intent(it, MainActivity::class.java))
+                    }else{
+                        it.startActivity(Intent(it, VerifyCodeLoginActivity::class.java))
+                    }
                 }
             }
         )
+
+
     }
 }
 

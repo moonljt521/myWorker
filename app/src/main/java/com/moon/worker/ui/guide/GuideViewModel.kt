@@ -1,7 +1,10 @@
 package com.moon.worker.ui.guide
 
 import androidx.lifecycle.ViewModel
+import com.moon.worker.LinqApplication
 import com.moon.worker.R
+import com.moon.worker.request.AccountHelper
+import com.moon.worker.utils.SharedPreferencesUtil
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -11,6 +14,10 @@ import kotlinx.coroutines.flow.StateFlow
  * @date: 3/10/23
  */
 class GuideViewModel : ViewModel() {
+
+    init {
+        AccountHelper.token = (SharedPreferencesUtil.getSPInstance(LinqApplication.application).getSP("token")  ?:"")
+    }
 
     private val _uiState = MutableStateFlow(GuideUiState())
 

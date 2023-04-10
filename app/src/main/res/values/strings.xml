@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">myworker</string>
+
+
+    <string name="tab_message">Message</string>>
+    <string name="tab_site">Site</string>>
+    <string name="tab_notification">Notification</string>>
+    <string name="tab_me">Me</string>>
 </resources>
