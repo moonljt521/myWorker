@@ -45,6 +45,7 @@ android {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
+        pickFirst 'lib/*/libshadowhook.so'
     }
 }
 
@@ -105,4 +106,7 @@ dependencies {
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
 //    implementation "com.blankj:utilcode:1.25.5"
+
+//    图片内存监控 test
+    implementation 'io.github.shixinzhang:android-bitmap-monitor:1.0.7'
 }

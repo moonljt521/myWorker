@@ -78,6 +78,7 @@ fun GuideScreen(
                     }else{
                         it.startActivity(Intent(it, VerifyCodeLoginActivity::class.java))
                     }
+                    it.finish()
                 }
             }
         )
