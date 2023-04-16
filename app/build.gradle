@@ -109,4 +109,6 @@ dependencies {
 
 //    图片内存监控 test
     implementation 'io.github.shixinzhang:android-bitmap-monitor:1.0.7'
+//    重启 Jake大神
+    implementation 'com.jakewharton:process-phoenix:2.1.2'
 }

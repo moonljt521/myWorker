@@ -37,6 +37,14 @@ class RequestApiTest {
         i.print()
     }
 
+    @Test
+    fun testBase(){
+        var i = 1
+        val a = i++
+        val b = ++ i
+        print("i = $i , a = $a , b = $b")
+    }
+
 }
 
 interface BasePrint {

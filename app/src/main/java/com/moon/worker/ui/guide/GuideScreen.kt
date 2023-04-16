@@ -19,6 +19,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
+import com.jakewharton.processphoenix.ProcessPhoenix
 import com.moon.worker.request.AccountHelper
 import com.moon.worker.ui.account.login_pwd.VerifyCodeLoginActivity
 import com.moon.worker.ui.common.CommonBlueButton
@@ -73,6 +74,10 @@ fun GuideScreen(
             title = "Sign In",
             click = {
                 context.let {
+
+                    // TODO: 测试重启app
+//                    ProcessPhoenix.triggerRebirth(it)
+//                    return@let
                     if(AccountHelper.token.isNotEmpty()){
                         it.startActivity(Intent(it, MainActivity::class.java))
                     }else{
