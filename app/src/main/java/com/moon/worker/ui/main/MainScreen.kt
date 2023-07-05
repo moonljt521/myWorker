@@ -25,6 +25,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.moon.worker.R
 import com.moon.worker.ui.message.MessageScreen
+import com.moon.worker.ui.site.list.SiteListScreen
 import com.moon.worker.ui.theme.tabNormalActiveColor
 import com.moon.worker.ui.theme.tabNormalColor
 
@@ -73,7 +74,7 @@ fun MainScreen() {
                 }
 
                 composable(Screen.Site.route){
-                    MessageScreen(content = "2")
+                    SiteListScreen()
                 }
 
                 composable(Screen.Notification.route){

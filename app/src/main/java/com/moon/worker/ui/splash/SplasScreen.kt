@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.draw.clip
 import androidx.lifecycle.viewModelScope
+import com.moon.worker.ui.main.MainActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.withContext
 
@@ -60,10 +61,11 @@ fun Splash(
     val context = LocalContext.current
 
     LaunchedEffect(splashUiState.turnToGuidePage){
+
         if (splashUiState.turnToGuidePage){
             withContext(Dispatchers.Main){
                 context.startActivity(Intent(context,
-                    GuideActivity::class.java))
+                    MainActivity::class.java))
                 (context as Activity).finish()
             }
         }
